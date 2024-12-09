@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace AdventOfCode.Solutions
+﻿namespace AdventOfCode.Solutions
 {
     internal partial class Year2024Day5Part2Solution : Year2024Solution
     {

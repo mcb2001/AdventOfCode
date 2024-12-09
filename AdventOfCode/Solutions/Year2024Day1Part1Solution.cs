@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode.Solutions
+﻿namespace AdventOfCode.Solutions
 {
     internal class Year2024Day1Part1Solution : Year2024Solution
     {
