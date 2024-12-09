@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions
         {
             int sum = 0;
 
-            string[] lines = await ReadLines("202402.txt");
+            string[] lines = await ReadAllLinesAsync();
 
             lines.AsParallel()
                 .WithDegreeOfParallelism(1)

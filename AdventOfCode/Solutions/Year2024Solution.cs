@@ -16,7 +16,14 @@ namespace AdventOfCode.Solutions
 
         public abstract Task<object> RunAsync();
 
-        protected Task<string[]> ReadLines(string file)
-            => File.ReadAllLinesAsync(@$"Data\{file}");
+        protected Task<string[]> ReadAllLinesAsync()
+            => File.ReadAllLinesAsync(FullPath);
+
+        protected Task<string> ReadAllTextAsync()
+            => File.ReadAllTextAsync(FullPath);
+
+        private string FullPath => @$"Data\{Year}{FullDay}.txt";
+
+        private string FullDay => Day.ToString().PadLeft(2, '0');
     }
 }

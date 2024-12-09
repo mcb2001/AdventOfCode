@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions
 
         public override async Task<object> RunAsync()
         {
-            string[] lines = await ReadLines("202401.txt");
+            string[] lines = await ReadAllLinesAsync();
             List<int> left = [];
             List<int> right = [];
 

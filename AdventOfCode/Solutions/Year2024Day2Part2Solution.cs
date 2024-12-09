@@ -15,52 +15,83 @@ namespace AdventOfCode.Solutions
         {
             int sum = 0;
 
-            string[] lines = await ReadLines("202402.txt");
+            string[] lines = await ReadAllLinesAsync();
 
-            lines.AsParallel()
-                .WithDegreeOfParallelism(1)
-                .ForAll(line =>
+            //Debug
+            /*
+            lines =
+                [
+                    "7 6 4 2 1",
+                    "1 2 7 8 9",
+                    "9 7 6 2 1",
+                    "1 3 2 4 5",
+                    "8 6 4 4 1",
+                    "1 3 6 7 9",
+                ];
+            */
+
+            foreach (string line in lines)
+            {
+                int[] digits = line.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse)
+                    .ToArray();
+
+                if (TestPartial(digits))
                 {
-
                     ++sum;
-                });
+                }
+            };
 
             return sum;
         }
 
-        private static bool Test(string line)
+        private static bool TestPartial(int[] digits)
         {
-            int[] digits = line.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => int.Parse(x))
-                .ToArray();
-
-            if (digits.Length < 2)
+            if (Test(digits))
             {
-                ++sum;
-                return;
+                return true;
             }
 
+            for (int i = 0; i < digits.Length; i++)
+            {
+                int[] newDigits = [.. digits[0..i], .. digits[(i + 1)..]];
 
-            int previousDirection = digits[0] - digits[1];
+                if (Test(newDigits))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool Test(int[] digits)
+        {
+            if (digits.Length < 2)
+            {
+                return true;
+            }
+
+            bool sign = (digits[0] - digits[1]) < 0;
 
             for (int i = 0; i < digits.Length - 1; ++i)
             {
                 int direction = digits[i] - digits[i + 1];
 
-                if (int.Sign(previousDirection) != int.Sign(direction))
+                if (sign != direction < 0)
                 {
-                    return;
+                    return false;
                 }
 
                 int size = Math.Abs(direction);
 
                 if (size < 1 || size > 3)
                 {
-                    return;
+                    return false;
                 }
-
-                previousDirection = direction;
             }
+
+            return true;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Solutions;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace AdventOfCode
 {
@@ -7,13 +8,16 @@ namespace AdventOfCode
     {
         public static async Task Main()
         {
-            List<ISolution> solutions =
-                [
-                    new Year2024Day1Part1Solution(),
-                    new Year2024Day1Part2Solution(),
-                    new Year2024Day2Part1Solution(),
-                    new Year2024Day2Part2Solution(),
-                ];
+            List<ISolution> solutions = typeof(ISolution).Assembly.GetTypes()
+                .Where(x => typeof(ISolution).IsAssignableFrom(x)
+                    && x.IsClass
+                    && !x.IsAbstract)
+                .Select(x => x.GetConstructors()[0].Invoke([]))
+                .Cast<ISolution>()
+                .OrderBy(x => x.Year)
+                .ThenBy(x => x.Day)
+                .ThenBy(x => x.Part)
+                .ToList();
 
             Stopwatch solutionStopwatch = new();
 
