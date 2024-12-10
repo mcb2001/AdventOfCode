@@ -1,9 +1,9 @@
-﻿namespace AdventOfCode.Solutions
+﻿namespace AdventOfCode.Solutions.Year2024
 {
-    internal partial class Year2024Day5Part2Solution : Year2024Solution
+    internal partial class Day5Part1Solution : Year2024Solution
     {
         public override int Day => 5;
-        public override int Part => 2;
+        public override int Part => 1;
 
         public override async Task<object> RunAsync()
         {
@@ -23,7 +23,6 @@
                     int right = int.Parse(partials[1]);
                     return (Left: left, Right: right);
                 })
-                //.OrderBy(x => x.Left)
                 .ToList();
 
             List<List<int>> inputs = parts[1]
@@ -38,17 +37,7 @@
 
             foreach (List<int> input in inputs)
             {
-                bool test = false;
-
-                while (IsMatch(rules, input) is (int Left, int Right) rule)
-                {
-                    test = true;
-                    int indexLeft = input.IndexOf(rule.Left);
-                    int indexRight = input.IndexOf(rule.Right);
-                    (input[indexLeft], input[indexRight]) = (input[indexRight], input[indexLeft]);
-                }
-
-                if (test)
+                if (IsMatch(rules, input))
                 {
                     count += input[input.Count / 2];
                 }
@@ -57,26 +46,26 @@
             return count;
         }
 
-        private static (int Left, int Right)? IsMatch(List<(int Left, int Right)> rules, List<int> input)
+        private static bool IsMatch(List<(int Left, int Right)> rules, List<int> input)
         {
-            foreach ((int Left, int Right) rule in rules)
+            foreach ((int Left, int Right) in rules)
             {
                 for (int a = 1; a < input.Count; ++a)
                 {
-                    if (input[a] == rule.Left)
+                    if (input[a] == Left)
                     {
                         for (int b = 0; b < a; ++b)
                         {
-                            if (input[b] == rule.Right)
+                            if (input[b] == Right)
                             {
-                                return rule;
+                                return false;
                             }
                         }
                     }
                 }
             }
 
-            return null;
+            return true;
         }
     }
 }

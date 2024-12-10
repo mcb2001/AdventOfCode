@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Solutions
+﻿namespace AdventOfCode.Solutions.Year2024
 {
     internal abstract class Year2024Solution : ISolution
     {

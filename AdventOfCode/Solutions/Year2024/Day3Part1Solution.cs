@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AdventOfCode.Solutions
+namespace AdventOfCode.Solutions.Year2024
 {
-    internal partial class Year2024Day3Part1Solution : Year2024Solution
+    internal partial class Day3Part1Solution : Year2024Solution
     {
         public override int Day => 3;
         public override int Part => 1;

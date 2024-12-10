@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode.Solutions
+﻿namespace AdventOfCode.Solutions.Year2024
 {
-    internal class Year2024Day1Part2Solution : Year2024Solution
+    internal class Day1Part2Solution : Year2024Solution
     {
         public override int Day => 1;
         public override int Part => 2;
